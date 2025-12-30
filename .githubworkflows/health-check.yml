@@ -1,0 +1,27 @@
+name: Backend Health Check
+on: [push] # Run every time you push code
+
+jobs:
+  test-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # Get your code
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' #
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./backend #
+
+      - name: Start Server and Check Health
+        # This is where the "Secret" is used!
+        env:
+          GOOGLE_BOOKS_API_KEY: ${{ secrets.GOOGLE_BOOKS_API_KEY }} 
+        run: |
+          node server.js & # Start the server in the background
+          sleep 5 # Wait for it to boot
+          curl http://localhost:3000/api/health-check # Check the endpoint
+        working-directory: ./backend
