@@ -25,6 +25,18 @@ The project includes a custom GitHub Actions workflow (`health-check.yml`) that 
 3.  Injecting the **Google Books API Key** from GitHub Secrets.
 4.  Starting the server and performing a health check to ensure the API is reachable.
 
+
+## 🛠️ Technical Challenges & Solutions
+
+### 1. Secret Leak Remediation
+* **Challenge**: During an early push, the API key was accidentally committed to a public repository.
+* **Solution**: Immediately revoked the compromised API key in the Google Cloud Console, scrubbed the Git history using `git rm -r --cached .`, and re-initialized a clean repository to ensure no trace of the secret remained.
+
+### 2. Automated Pipeline Configuration
+* **Challenge**: Configuring GitHub Actions to recognize the local folder structure and inject secure variables.
+* **Solution**: Corrected the directory pathing to `.github/workflows/` and utilized GitHub Secrets to securely pass the `GOOGLE_BOOKS_API_KEY` into the virtual Ubuntu runner environment during the health check phase.
+
+
 ## ⚙️ Local Setup
 
 1.  **Clone the repository**:
