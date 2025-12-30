@@ -1,0 +1,47 @@
+# 📚 Book Management System
+
+![Build Status](https://github.com/iamAditya-DS/Book-Management-System/actions/workflows/health-check.yml/badge.svg)
+
+Book Management System project used to demonstrate secure API management and CI/CD pipeline implementation.
+
+## 🚀 Overview
+This application allows users to search for books in real-time using the **Google Books API**. It was built with a strong focus on professional DevOps practices, ensuring that sensitive credentials are never exposed and that the application is automatically tested upon every update.
+
+## ✨ Features
+* **Real-time Book Search**: Connects directly to the Google Books API for up-to-date information.
+* **Secure Backend**: Environment variables are protected locally via `.gitignore`.
+* **Automated CI/CD**: Uses GitHub Actions to verify backend health on every push.
+* **Secret Management**: Sensitive API keys are managed securely using GitHub Secrets.
+
+## 🛠️ Tech Stack
+* **Frontend**: HTML, CSS, JavaScript
+* **Backend**: Node.js, Express.js
+* **DevOps**: GitHub Actions, Git
+
+## 🛡️ CI/CD Implementation
+The project includes a custom GitHub Actions workflow (`health-check.yml`) that automates the following steps:
+1.  Provisioning a virtual Ubuntu environment.
+2.  Installing dependencies via `npm`.
+3.  Injecting the **Google Books API Key** from GitHub Secrets.
+4.  Starting the server and performing a health check to ensure the API is reachable.
+
+## ⚙️ Local Setup
+
+1.  **Clone the repository**:
+    ```bash
+    git clone [https://github.com/iamAditya-DS/Book-Management-System.git](https://github.com/iamAditya-DS/Book-Management-System.git)
+    ```
+2.  **Install dependencies**:
+    ```bash
+    cd backend
+    npm install
+    ```
+3.  **Configure Environment**:
+    Create a `.env` file in the `backend` folder and add your key:
+    ```text
+    GOOGLE_BOOKS_API_KEY=your_key_here
+    ```
+4.  **Run the application**:
+    ```bash
+    node server.js
+    ```
